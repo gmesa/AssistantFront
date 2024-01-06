@@ -1,0 +1,17 @@
+﻿@import "app.scss";
+
+.chats {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    list-style: none;
+    padding: 0.8rem;
+
+    .chat {
+        background-color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
