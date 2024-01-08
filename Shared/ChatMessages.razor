@@ -1,0 +1,45 @@
+﻿<div class="chat-messages w-75">
+    
+    @if (Messages != null && Messages.Any())
+    {
+        <div class="messages position-relative">
+            @foreach (var message in Messages)
+            {
+                <div class="hist-message @((message.IsFromAssistant ? "msg-assistant" : "msg-user"))">
+                    <span>
+                        @((message.IsFromAssistant ? "Bot" : "You"))
+                    </span>
+                    <div>@message.Content</div>
+                </div>
+            }
+        </div>
+
+    }
+    else
+    {
+        <div class="no-messages">
+            <img src="/bot.png" />
+            <span class="no-messages-text"> How can I help you today? </span>
+
+        </div>    
+    }
+    <div class="msg-cont">
+        <form @onsubmit="@SendMessage">
+            <div class="send-message">
+                <input type="text" placeholder="Send message to the assistant"
+                       rows="3"
+                       name="Text"
+                       id="text"
+                       resize="false"
+                       autocomplete="off"
+                       @bind="@Question">
+
+                </input>
+
+                <button class="btn btn-submit" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

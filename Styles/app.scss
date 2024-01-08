@@ -1,4 +1,26 @@
-﻿html, body {
+﻿@import "variables.scss";
+
+.page {
+    background-color: $black;
+    color: $white;
+    font-size: $font-size-sm;
+}
+
+.content {
+    padding-top: 0 !important;
+}
+
+.col-2-custom {
+    width: 24%;
+    flex: 0 0 auto;
+}
+
+.col-9-custom {
+    width: 76%;
+    flex: 0 0 auto;
+}
+
+html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 

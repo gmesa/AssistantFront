@@ -1,21 +1,16 @@
 using AccountingAssistant.Clients;
 using AccountingAssistant.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace AccountingAssistant.Pages
 {
     public partial class Home
     {
-        [Inject]
-        public IAssistantService AssistantService { get; set; }
-
-        private string response = String.Empty;
-
-        protected async override Task OnInitializedAsync()
+       private ErrorBoundary errorBoundary { get; set; }       
+        private void ResetError()
         {
-           response = await AssistantService.GetAnswerForUserQuestion("Hello");
-            
+            errorBoundary?.Recover();
         }
-
     }
 }

@@ -1,17 +1,176 @@
 ﻿@import "app.scss";
 
-.chats {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    list-style: none;
-    padding: 0.8rem;
+*::-webkit-scrollbar {
+    width: 12px;
+}
 
-    .chat {
-        background-color: white;
-        padding: 0.5rem;
+.assistant {
+    height: calc(100vh);
+
+    .chat-cont {
+        padding: 1rem;
+        background-color: $black-dark;
+    }
+}
+
+.chats {
+    width: 100%;
+
+    .btn-add-chat {
+        border: none;
+        border-radius: 10px;
+        text-align: left;
+        padding: .5rem .8rem;
+        width: 38%;
+        background: white;
+        color: $fc-gray;
+        margin-bottom: 1rem;
+        width: 9.5rem;
+
+        &:disabled {
+            opacity: 0.5;
+        }
+
+        span {
+            margin-right: 0.2rem;
+        }
+    }
+
+    .loading-chats {
+        padding: 0;
+        width: 100%;
+        text-align: left;
+
+        span {
+            color: white;
+        }
+    }
+
+    .chats-list {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        list-style: none;
+        padding: 0.8rem 0;
+        width: 100%;
+        cursor: pointer;
+
+        .chat {
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            color: $fc-gray;
+            font-size: $font-size-small;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.chat-messages {
+    position: relative;
+    padding-top: 2rem;
+
+    .messages {
+        height: calc(100% - 120px);
+        overflow: auto;
+
+        -webkit-scrollbar {
+            width: 12px;
+        }
+    }
+
+    .hist-message {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+        align-items: inherit;
+
+        div {
+            padding-top: 0.3rem;
+            width: calc(100% - 45px);
+        }
+
+        &.msg-user {
+            span {
+                background: $black-dark;
+            }
+        }
+
+        &.msg-assistant {
+            span {
+                background: red;
+            }
+        }
+
+        span {
+            margin-right: 0.5rem;
+            display: block;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            border-radius: 17px;
+            align-items: center;
+        }
+    }
+
+    .msg-cont {
+        position: absolute;
+        bottom: .5rem;
+        width: 100%;
+    }
+
+    .send-message {
+        background: white;
+        padding: .2rem;
+        display: flex;
+        align-items: center;
         border-radius: 0.5rem;
-        margin-bottom: 0.5rem;
+        width: 100%;
+
+        input[type=text], textarea {
+            width: 100%;
+            height: 25px;
+            resize: none;
+            border: none;
+            padding-right: 20px;
+
+            &:focus {
+                outline: none;
+            }
+
+            .btn-submit {
+                position: absolute;
+                right: 0;
+            }
+        }
+
+        .btn {
+            color: $white;
+            background-color: $black;
+            border-color: $black;
+        }
+    }
+
+    .no-messages {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .no-messages-text {
+            font-size: $font-size-big
+        }
+
+        img {
+            border-radius: 20px;
+            width: 80px;
+        }
     }
 }

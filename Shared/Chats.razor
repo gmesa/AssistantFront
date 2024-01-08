@@ -1,0 +1,32 @@
+﻿<div class="d-flex flex-wrap chats">
+
+    <button class="btn-add-chat" @onclick="AddNewChat"><span>+</span> New Chat</button>
+    @if (chats == null)
+    {
+        <div class="loading-chats">
+            <span>Loading chats...</span>
+        </div>
+    }
+    else
+    {
+        @if (chats.Count == 0)
+        {
+            <div class="no-chats">
+                <span>There are not available chat history for you</span>
+            </div>
+        }
+        else
+        {
+            <ul class="chats-list">
+                @foreach (var chat in @chats)
+                {
+                    <li class="chat" @onclick="() => SetCurrentChat(chat)">@chat.Title</li>
+                }
+
+            </ul>
+        }
+
+    }
+
+</div>
+
