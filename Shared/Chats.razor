@@ -1,6 +1,6 @@
 ﻿<div class="d-flex flex-wrap chats">
 
-    <button class="btn-add-chat" @onclick="AddNewChat"><span>+</span> New Chat</button>
+    <button class="btn-add" @onclick="AddNewChat"><span>+</span> New Chat</button>
     @if (chats == null)
     {
         <div class="loading-chats">
@@ -20,7 +20,9 @@
             <ul class="chats-list">
                 @foreach (var chat in @chats)
                 {
-                    <li class="chat" @onclick="() => SetCurrentChat(chat)">@chat.Title</li>
+                    <li class="chat" title="@chat.CreatedAt.ToString(AccountingAssistant.Utils.GlobalConstants.DateFormat)" 
+                            @onclick="() => SetCurrentChat(chat)">@chat.Title
+                    </li>
                 }
 
             </ul>

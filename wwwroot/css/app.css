@@ -141,23 +141,6 @@ code {
 .chats {
   width: 100%;
 }
-.chats .btn-add-chat {
-  border: none;
-  border-radius: 10px;
-  text-align: left;
-  padding: 0.5rem 0.8rem;
-  width: 38%;
-  background: white;
-  color: #3A3B3C;
-  margin-bottom: 1rem;
-  width: 9.5rem;
-}
-.chats .btn-add-chat:disabled {
-  opacity: 0.5;
-}
-.chats .btn-add-chat span {
-  margin-right: 0.2rem;
-}
 .chats .loading-chats {
   padding: 0;
   width: 100%;
@@ -193,7 +176,7 @@ code {
   padding-top: 2rem;
 }
 .chat-messages .messages {
-  height: calc(100% - 120px);
+  height: calc(100% - 80px);
   overflow: auto;
 }
 .chat-messages .messages -webkit-scrollbar {
@@ -257,6 +240,83 @@ code {
   background-color: #15151B;
   border-color: #15151B;
 }
+.chat-messages .btn-add {
+  width: 7.2rem !important;
+  padding: 0.3rem 0.4rem;
+}
+.chat-messages .cust-btn-close {
+  position: absolute;
+  right: -10px;
+  top: -12px;
+  cursor: pointer;
+}
+.chat-messages .load-document {
+  float: right;
+  text-decoration: underline;
+  margin-bottom: 0.1rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+.chat-messages .processsing-request {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(21, 21, 27, 0.9);
+  align-items: center;
+  flex-direction: column;
+}
+.chat-messages .processsing-request .load-img {
+  width: 9rem;
+  height: 9rem;
+}
+.chat-messages .processsing-request p {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(21, 21, 27, 0.9);
+  text-align: center;
+  padding: 2rem 0;
+  width: 90%;
+  border-radius: 10px;
+}
+.chat-messages .upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #3A3B3C;
+}
+.chat-messages .upload label {
+  font-weight: bold;
+}
+.chat-messages .upload input[type=file] {
+  float: right;
+  width: 250px;
+  max-width: 100%;
+  color: #3A3B3C;
+  padding: 0.2rem 0.2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
+.chat-messages .upload input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #15151B;
+  padding: 0.3rem 1.2rem;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.chat-messages .upload input[type=file]::file-selector-button:hover {
+  background: #101015;
+}
 .chat-messages .no-messages {
   height: 100%;
   width: 100%;
@@ -271,4 +331,40 @@ code {
 .chat-messages .no-messages img {
   border-radius: 20px;
   width: 80px;
+}
+.chat-messages .show-pdf-form {
+  display: flex;
+}
+.chat-messages .hide-pdf-form {
+  display: none;
+}
+
+.btn-add {
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  padding: 0.5rem 0.8rem;
+  width: 38%;
+  background: white;
+  color: #3A3B3C;
+  margin-bottom: 1rem;
+  width: 9.5rem;
+}
+.btn-add:disabled {
+  opacity: 0.5;
+}
+.btn-add span {
+  margin-right: 0.2rem;
+}
+
+.cust-btn-close {
+  background: white;
+  color: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }

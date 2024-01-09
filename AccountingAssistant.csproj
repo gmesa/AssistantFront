@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="Pages\Counter.razor" />
+    <Content Remove="Pages\Weather.razor" />
   </ItemGroup>
 
   <ItemGroup>

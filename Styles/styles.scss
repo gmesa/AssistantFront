@@ -1,4 +1,5 @@
 ﻿@import "app.scss";
+@import "mixins.scss";
 
 *::-webkit-scrollbar {
     width: 12px;
@@ -15,26 +16,6 @@
 
 .chats {
     width: 100%;
-
-    .btn-add-chat {
-        border: none;
-        border-radius: 10px;
-        text-align: left;
-        padding: .5rem .8rem;
-        width: 38%;
-        background: white;
-        color: $fc-gray;
-        margin-bottom: 1rem;
-        width: 9.5rem;
-
-        &:disabled {
-            opacity: 0.5;
-        }
-
-        span {
-            margin-right: 0.2rem;
-        }
-    }
 
     .loading-chats {
         padding: 0;
@@ -75,7 +56,7 @@
     padding-top: 2rem;
 
     .messages {
-        height: calc(100% - 120px);
+        height: calc(100% - 80px);
         overflow: auto;
 
         -webkit-scrollbar {
@@ -156,6 +137,94 @@
         }
     }
 
+    .btn-add {
+        width: 7.2rem !important;
+        padding: 0.3rem 0.4rem;
+    }
+
+    .cust-btn-close {
+        position: absolute;
+        right: -10px;
+        top: -12px;
+        cursor: pointer;
+    }
+
+    .load-document {
+        float: right;
+        text-decoration: underline;
+        margin-bottom: 0.1rem;
+        color: $white;
+        cursor: pointer;
+    }
+
+    .processsing-request {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: rgb(21,21,27, .9);
+        align-items: center;
+        flex-direction: column;
+
+        .load-img {
+            width: 9rem;
+            height: 9rem;
+        }
+
+        p {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgb(21, 21, 27, .9);
+            text-align: center;
+            padding: 2rem 0;
+            width: 90%;
+            border-radius: 10px;
+        }
+    }
+
+    .upload {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        color: $fc-gray;
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type=file] {
+            float: right;
+            width: 250px;
+            max-width: 100%;
+            color: $fc-gray;
+            padding: .2rem .2rem;
+            background: $white;
+            @include border-radius(10px);
+            border: 1px solid #555;
+
+            &::file-selector-button {
+                margin-right: 20px;
+                border: none;
+                background: $black;
+                padding: .3rem 1.2rem;
+                border-radius: 10px;
+                color: $white;
+                cursor: pointer;
+                transition: background .2s ease-in-out;
+            }
+        }
+
+        input[type=file]::file-selector-button:hover {
+            background: $black-dark;
+        }
+    }
+
     .no-messages {
         height: 100%;
         width: 100%;
@@ -173,4 +242,48 @@
             width: 80px;
         }
     }
+
+    .show-pdf-form {
+        display: flex;
+    }
+
+    .hide-pdf-form {
+        display: none;
+    }
+}
+
+
+
+// Common classes
+
+.btn-add {
+    border: none;
+    border-radius: 10px;
+    text-align: left;
+    padding: .5rem .8rem;
+    width: 38%;
+    background: white;
+    color: $fc-gray;
+    margin-bottom: 1rem;
+    width: 9.5rem;
+
+    &:disabled {
+        opacity: 0.5;
+    }
+
+    span {
+        margin-right: 0.2rem;
+    }
+}
+
+.cust-btn-close {
+    background: white;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }

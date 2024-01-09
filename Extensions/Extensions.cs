@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace AccountingAssistant.Extensions
 {
@@ -39,6 +40,24 @@ namespace AccountingAssistant.Extensions
         public static StringContent AsContent(this string content, string mediaType = "application/json")
         {
             return new StringContent(content, Encoding.UTF8, mediaType);
+        }
+
+        /// <summary>
+        /// Return paragraphs separated by Return-NewLine surrounded by html paragrapg tag
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ConvertToHtmlParagraph(this string s)
+        {
+            return s != null ? Regex.Replace(s, "(?<par>.+)", "<p>${par}</p>", RegexOptions.Multiline).Replace("<p><p>", "<p>") : null;
+
+        }
+
+        public static string CustomCloneString(this string s) {
+
+            char[] chars = new char[s.Length];
+            s.CopyTo(0, chars, 0, s.Length);
+            return chars.ToString();
         }
     }
 }

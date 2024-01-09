@@ -1,6 +1,7 @@
 ﻿using AccountingAssistant.Configuration;
 using AccountingAssistant.DTOs;
 using AccountingAssistant.Extensions;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace AccountingAssistant.Clients
@@ -13,6 +14,7 @@ namespace AccountingAssistant.Clients
         public HttpClient HttpClient { get; }
         private readonly ILogger<AssistantClient> _logger;
         private readonly JsonSerializerOptions _options;
+        private readonly AssistantClientOptions _assistantClientOptions;
 
         /// <summary>
         /// Create an instance of the <see cref="AssistantClient"/>
@@ -23,13 +25,13 @@ namespace AccountingAssistant.Clients
         {
             _logger = logger;
 
-            var options = new AssistantClientOptions();
-            configuration.GetSection(AssistantClientOptions.ConfigurationSectionName).Bind(options);
+            _assistantClientOptions = new AssistantClientOptions();
+            configuration.GetSection(AssistantClientOptions.ConfigurationSectionName).Bind(_assistantClientOptions);
 
-            string baseAddress = options.BaseUrl;
+            string baseAddress = _assistantClientOptions.BaseUrl;
             HttpClient = client;
             HttpClient.BaseAddress = new Uri(baseAddress);
-            HttpClient.Timeout = new TimeSpan(0, 0, 30);
+            HttpClient.Timeout = new TimeSpan(0, 10, 0);
 
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
@@ -41,11 +43,12 @@ namespace AccountingAssistant.Clients
         /// Retrieves the answer for a user's question
         /// </summary>
         /// <param name="question">The question asked by the user.</param>
+        /// <param name="sessionChatId">The id of the session chat.</param>
         /// <returns>A string representing the answer to the user's question.</returns>
-        public async Task<string> GetAnswerForUserQuestion(string question)
+        public async Task<string> GetAnswerForUserQuestion(int sessionChatId, string question)
         {
 
-            string url = $"v1/accounting/query/{question}";
+            string url = $"v1/assistant/sessionChatId/{sessionChatId}/query/{question}";
 
             try
             {
@@ -62,6 +65,28 @@ namespace AccountingAssistant.Clients
             }
 
 
+        }
+
+        public async Task<string> GetSummaryFromPdf(MultipartFormDataContent content) {
+
+            string url = $"v1/assistant/documentSummary";
+
+            try
+            {
+                
+                CancellationTokenSource timeoutSource = new CancellationTokenSource(_assistantClientOptions.TimeOutForSummaryPdf);
+                using (var response = await HttpClient.PostAsync(url, content, timeoutSource.Token))
+                {
+                    timeoutSource.Dispose();
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsStringAsync();                    
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "There was an error trying to comunicate with the assistant API");
+                return null;
+            }
         }
 
         #endregion

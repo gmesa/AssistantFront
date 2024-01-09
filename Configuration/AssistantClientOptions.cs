@@ -3,6 +3,9 @@
     public class AssistantClientOptions
     {
         public const string ConfigurationSectionName = "AssistantClient";
+
         public string BaseUrl { get; set; }
+
+        public int TimeOutForSummaryPdf { get; set; }
     }
 }

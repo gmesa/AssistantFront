@@ -25,12 +25,25 @@ namespace AccountingAssistant.Services
         /// Retrieves the answer for a user's question
         /// </summary>
         /// <param name="question">The question asked by the user.</param>
+        /// <param name="sessionChatId">The ID of the chat message.</param>
         /// <returns>A string representing the answer to the user's question.</returns>
-        public async Task<string> GetAnswerForUserQuestion(string question)
+        public async Task<string> GetAnswerForUserQuestion(int sessionChatId, string question)
         {
-            string response = await _assistantClient.GetAnswerForUserQuestion(question);
+            string response = await _assistantClient.GetAnswerForUserQuestion(sessionChatId, question);
 
-            return response != null ? response : "The assistant are not available on this time. Please try later";
+            return response != null ? response : "There was a problem trying to comunicate with the assistant. Please try again";
+        }
+
+        /// <summary>
+        /// Retrieves a summary from a PDF file.
+        /// </summary>
+        /// <param name="content">The multipart form data content containing the PDF file.</param>
+        /// <returns>The summary extracted from the PDF file.</returns>
+        public async Task<string> GetSummaryFromPdfFile(MultipartFormDataContent content)
+        {
+            string response = await _assistantClient.GetSummaryFromPdf(content);
+
+            return response != null ? response : "There was a problem trying to comunicate with the assistant. Please try again";
         }
 
         #endregion
@@ -83,7 +96,7 @@ namespace AccountingAssistant.Services
         public async Task<ChatMessage> AddChatMessage(CreateChatMessage message)
         {
             return await _assistantClient.AddChatMessages(message);
-        }
+        }       
 
 
         #endregion

@@ -1,9 +1,10 @@
-﻿<main class="row assistant">
+﻿@inject IJSRuntime JsRuntime
+<main class="row assistant">
     <div class="col-2-custom chat-cont">
         <Chats ChangedCurrentChat="@ChangeCurrentChat" chats="@chats" />
     </div>
     <div class="col-9-custom justify-content-center d-flex h-100">
-        <ChatMessages messages="@messages" OnMessageSent="@SendQuestion" />
+        <ChatMessages messages="@messages" OnMessageSent="@SendQuestion" OnFileUpload="@OnFileUpload" ProcessingFile="@ProcessingFile" />
     </div>
 </main>
 

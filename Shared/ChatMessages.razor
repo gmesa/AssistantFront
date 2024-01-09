@@ -1,17 +1,24 @@
 ﻿<div class="chat-messages w-75">
-    
+
     @if (Messages != null && Messages.Any())
     {
-        <div class="messages position-relative">
+        <div class="messages position-relative" id="messageContainer">
             @foreach (var message in Messages)
             {
                 <div class="hist-message @((message.IsFromAssistant ? "msg-assistant" : "msg-user"))">
                     <span>
                         @((message.IsFromAssistant ? "Bot" : "You"))
                     </span>
-                    <div>@message.Content</div>
+                    <div>@((MarkupString)message.Content)</div>
                 </div>
             }
+        </div>
+
+        <div class="processsing-request @(( ProcessingFile ? "d-flex" : "d-none"))">
+            <img src="/tube-spinner.svg" class="load-img" />
+            <p>
+                This may take a few seconds depending on the size of the document. Please, wait.
+            </p>
         </div>
 
     }
@@ -21,12 +28,19 @@
             <img src="/bot.png" />
             <span class="no-messages-text"> How can I help you today? </span>
 
-        </div>    
+        </div>
     }
     <div class="msg-cont">
         <form @onsubmit="@SendMessage">
-            <div class="send-message">
-                <input type="text" placeholder="Send message to the assistant"
+
+            <a class="load-document @((!VisiblePdfForm ? "d-flex" : "d-none"))"
+               @onclick="() => TooglePdfFormVisible()">
+                Load document
+            </a>
+
+            <div class="send-message @((VisiblePdfForm ? "d-none" : "d-flex"))">
+                <input type="text"
+                       placeholder="Send message to the assistant"
                        rows="3"
                        name="Text"
                        id="text"
@@ -38,6 +52,13 @@
 
                 <button class="btn btn-submit" type="submit">Send</button>
             </div>
+
+            <div class="upload file-select @((!VisiblePdfForm ? "d-none" : "d-flex"))">
+                <a class="cust-btn-close" @onclick="() => TooglePdfFormVisible()">X</a>
+                <label for="pdfFile">Please sumarize this pdf document</label>
+                <InputFile id="pdfFile" OnChange="@OnInputFileChange" class="custom-file-input" aria-label="File" />
+            </div>
+
         </form>
     </div>
 </div>
